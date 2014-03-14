@@ -19,8 +19,8 @@ MagGame.Boot.prototype = {
     preload: function () {
 
         //  Here we load the assets required for our preloader (in this case a background and a loading bar)
-        this.load.image('preloaderBackground', 'images/preloader_background.jpg');
-        this.load.image('preloaderBar', 'images/preloader_bar.png');
+        this.load.image('preloaderBackground', 'images/loading.png');
+        this.load.image('preloaderBar', 'images/loading.png');
 
     },
 
@@ -35,7 +35,7 @@ MagGame.Boot.prototype = {
             this.game.stage.scale.minWidth = 480;
             this.game.stage.scale.minHeight = 260;
             this.game.stage.scale.maxWidth = 1024;
-            this.game.stage.scale.maxHeight = 768;
+            this.game.stage.scale.maxHeight = 960;
             this.game.stage.scale.pageAlignHorizontally = true;
             this.game.stage.scale.pageAlignVertically = true;
             this.game.stage.scale.setScreenSize(true);
@@ -46,7 +46,7 @@ MagGame.Boot.prototype = {
             this.game.stage.scale.minWidth = 480;
             this.game.stage.scale.minHeight = 260;
             this.game.stage.scale.maxWidth = 1024;
-            this.game.stage.scale.maxHeight = 768;
+            this.game.stage.scale.maxHeight = 960;
             this.game.stage.scale.pageAlignHorizontally = true;
             this.game.stage.scale.pageAlignVertically = true;
             this.game.stage.scale.forceOrientation(true, false);

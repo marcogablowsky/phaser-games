@@ -26,10 +26,21 @@ MagGame.Game = function (game) {
 
 MagGame.Game.prototype = {
 
+    loadMap: function(){
+        this.map = this.game.add.tilemap('testmap');
+        //  The first parameter is the tileset name, as specified in the Tiled map editor (and in the tilemap json file)
+        //  The second parameter maps this name to the Phaser.Cache key 'tiles'
+        this.map.addTilesetImage('basictiles16x16', 'tiles');
+
+        //  Creates a layer from the World1 layer in the map data.
+        //  A Layer is effectively like a Phaser.Sprite, so is added to the display list.
+        this.layer = this.map.createLayer('main');
+        //  This resizes the game world to match the layer dimensions
+        this.layer.resizeWorld();
+    },
+
 	create: function () {
-
-		//	Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
-
+       this.loadMap();
 	},
 
 	update: function () {
