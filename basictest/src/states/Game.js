@@ -43,7 +43,8 @@ MagGame.Game.prototype = {
     },
 
     createPlayer: function(){
-        this.player = this.game.add.sprite(16, 430, 'player');
+        this.player = this.game.add.sprite(16, 32, 'player');
+        //What is this? Causes slowdown walking right
         //this.player.body.linearDamping = 1;
         this.player.body.collideWorldBounds = true;
         this.game.camera.follow(this.player);
@@ -52,8 +53,6 @@ MagGame.Game.prototype = {
 	create: function () {
         this.createMap();
         this.createPlayer();
-
-        this.game.physics.gravity.y = 200;
         this.cursors = this.game.input.keyboard.createCursorKeys();
     },
 
@@ -62,25 +61,33 @@ MagGame.Game.prototype = {
 
         this.player.body.velocity.x = 0;
 
-        if (this.cursors.up.isDown && this.player.body.blocked.down){
-            this.player.body.velocity.y = -150;
+        if (this.player.body.blocked.down){
+            this.player.body.gravity.y = 200;
+        }
+        else{
+            this.player.body.gravity.y = 600;
         }
 
+        if (this.cursors.up.isDown && this.player.body.blocked.down){
+            this.player.body.velocity.y = -250;
+        }
+        if (this.cursors.right.isDown){
+            this.player.body.velocity.x = 150;
+            this.player.scale.x = 1;
+        }
         if (this.cursors.left.isDown){
             this.player.body.velocity.x = -150;
+            this.player.scale.x = -1;
         }
-        else if (this.cursors.right.isDown){
-            this.player.body.velocity.x = 150;
-        }
+
+
     },
 
-    /*
     render: function(){
 
-        this.game.debug.renderCameraInfo(this.game.camera, 320, 320);
+        //this.game.debug.renderCameraInfo(this.game.camera, 320, 320);
         //this.game.debug.renderPhysicsBody(this.player.body);
     },
-    */
 
 	quitGame: function (pointer) {
 
