@@ -26,28 +26,61 @@ MagGame.Game = function (game) {
 
 MagGame.Game.prototype = {
 
-    loadMap: function(){
+    createMap: function(){
         this.map = this.game.add.tilemap('testmap');
         //  The first parameter is the tileset name, as specified in the Tiled map editor (and in the tilemap json file)
         //  The second parameter maps this name to the Phaser.Cache key 'tiles'
         this.map.addTilesetImage('basictiles16x16', 'tiles');
 
+        this.map.setCollisionBetween(0, 7);
         //  Creates a layer from the World1 layer in the map data.
         //  A Layer is effectively like a Phaser.Sprite, so is added to the display list.
         this.layer = this.map.createLayer('main');
+        //this.layer.debug = true;
+
         //  This resizes the game world to match the layer dimensions
         this.layer.resizeWorld();
     },
 
+    createPlayer: function(){
+        this.player = this.game.add.sprite(16, 430, 'player');
+        //this.player.body.linearDamping = 1;
+        this.player.body.collideWorldBounds = true;
+        this.game.camera.follow(this.player);
+    },
+
 	create: function () {
-       this.loadMap();
-	},
+        this.createMap();
+        this.createPlayer();
+
+        this.game.physics.gravity.y = 200;
+        this.cursors = this.game.input.keyboard.createCursorKeys();
+    },
 
 	update: function () {
+        this.game.physics.collide(this.player,this.layer);
 
-		//	Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
+        this.player.body.velocity.x = 0;
 
-	},
+        if (this.cursors.up.isDown && this.player.body.blocked.down){
+            this.player.body.velocity.y = -150;
+        }
+
+        if (this.cursors.left.isDown){
+            this.player.body.velocity.x = -150;
+        }
+        else if (this.cursors.right.isDown){
+            this.player.body.velocity.x = 150;
+        }
+    },
+
+    /*
+    render: function(){
+
+        this.game.debug.renderCameraInfo(this.game.camera, 320, 320);
+        //this.game.debug.renderPhysicsBody(this.player.body);
+    },
+    */
 
 	quitGame: function (pointer) {
 

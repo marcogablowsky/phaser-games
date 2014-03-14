@@ -10,6 +10,12 @@ MagGame.Preloader = function (game) {
 
 MagGame.Preloader.prototype = {
 
+    loadMapResources: function(){
+        this.game.load.tilemap('testmap', 'maps/basic.json', null, Phaser.Tilemap.TILED_JSON);
+        //  Next we load the tileset. This is just an image, loaded in via the normal way we load images:
+        this.game.load.image('tiles', 'maps/tilesets/basictiles16x16.png');
+    },
+
 	preload: function () {
 
 		//	These are the assets we loaded in Boot.js
@@ -23,19 +29,8 @@ MagGame.Preloader.prototype = {
 		this.load.setPreloadSprite(this.preloadBar);
 
 		//	Here we load the rest of the assets our game needs.
-		//	As this is just a Project Template I've not provided these assets, the lines below won't work as the files themselves will 404, they are just an example of use.
-
-        this.game.load.tilemap('testmap', 'maps/basic.json', null, Phaser.Tilemap.TILED_JSON);
-
-        //  Next we load the tileset. This is just an image, loaded in via the normal way we load images:
-
-        this.game.load.image('tiles', 'maps/tilesets/basictiles16x16.png');
-		//this.load.image('titlepage', 'images/title.jpg');
-		//this.load.atlas('playButton', 'images/play_button.png', 'images/play_button.json');
-		//this.load.audio('titleMusic', ['audio/main_menu.mp3']);
-		//this.load.bitmapFont('caslon', 'fonts/caslon.png', 'fonts/caslon.xml');
-		//	+ lots of other required assets here
-
+        this.loadMapResources();
+        this.game.load.image('player', 'images/player.png');
 	},
 
 	create: function () {

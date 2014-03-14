@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" width="64" height="60" tilewidth="16" tileheight="16" backgroundcolor="#c5cdd6">
+<map version="1.0" orientation="orthogonal" width="32" height="30" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="basictiles16x16" tilewidth="16" tileheight="16">
   <image source="tilesets/basictiles16x16.png" width="128" height="16"/>
  </tileset>
- <layer name="main" width="64" height="60">
+ <layer name="main" width="32" height="30">
   <data encoding="base64" compression="zlib">
-   eJzt1tEOgjAMheEKJnv/NzZeLEHEbR0bG57/JL0wYNmHjLqa2UpJl2Lw48ePH79m8OPHjx+/ZvDjx48fv2bw48ePH79m8OPHjx+/ZqI9jF7IoODHHwy/qv/tXkzTH393NX+wT7uif9kVfp3M4A+Z6nndh83hTx3rtZ47+EuOe66zr1F+zzPeYj3Ruq/Fvu/BVf4e56Z6HPm390HVf/Xz732n/aO/5/m/eoz218z0VvNvtL/W0XL2ldh7+q/83lGfmfy5/7yevVLaZzZ/y96p2V4697f+msqtMfX5TFr7nxV1J/+RWcGfc5/1e/ZH7R7zvNu87lgvIQ0JCw==
+   eJxjZ2BgYB9gPJBg1P6Ra/9Ap79R+0ftH7V/1P5R+0ftH7V/ZNk/0O3fwdDOZ0djM0ExMWGCrJ6QPmLsx6cOnxuIjUdy7CK3v0Sum9Dl0MOXmPhB10dI7UBjAIkqBLA=
   </data>
  </layer>
 </map>
