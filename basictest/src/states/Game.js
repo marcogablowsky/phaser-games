@@ -19,6 +19,9 @@ MagGame.Game = function (game) {
     this.physics;	//	the physics manager
     this.rnd;		//	the repeatable random number generator
 
+    this.vel = {x: 150, y:350},
+    this.scale = {x: 1, y: 1}
+
     //	You can use any of these from any function within this State.
     //	But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
 
@@ -43,11 +46,12 @@ MagGame.Game.prototype = {
     },
 
     createPlayer: function(){
-        this.player = this.game.add.sprite(16, 32, 'player');
+        this.player = this.game.add.sprite(16, 430, 'player');
         //What is this? Causes slowdown walking right
         //this.player.body.linearDamping = 1;
         this.player.body.collideWorldBounds = true;
-        this.game.camera.follow(this.player);
+        this.player.anchor.setTo(0.5,0.5);
+        this.game.camera.follow(this.player,Phaser.Camera.FOLLOW_PLATFORMER);
     },
 
 	create: function () {
@@ -59,25 +63,30 @@ MagGame.Game.prototype = {
 	update: function () {
         this.game.physics.collide(this.player,this.layer);
 
-        this.player.body.velocity.x = 0;
+        var cur = this.cursors;
+        var body = this.player.body;
 
-        if (this.player.body.blocked.down){
-            this.player.body.gravity.y = 200;
+        if(!cur.left.isDown && !cur.right.isDown){
+            this.player.body.velocity.x = 0;
+        }
+
+        if (body.blocked.down){
+            body.gravity.y = 200;
         }
         else{
-            this.player.body.gravity.y = 600;
+            body.gravity.y = 600;
         }
 
-        if (this.cursors.up.isDown && this.player.body.blocked.down){
-            this.player.body.velocity.y = -250;
+        if (cur.up.isDown && this.player.body.blocked.down){
+            body.velocity.y = -this.vel.y;
         }
-        if (this.cursors.right.isDown){
-            this.player.body.velocity.x = 150;
-            this.player.scale.x = 1;
+        if (cur.right.isDown){
+            body.velocity.x = this.vel.x;
+            this.player.scale.x = this.scale.x;
         }
-        if (this.cursors.left.isDown){
-            this.player.body.velocity.x = -150;
-            this.player.scale.x = -1;
+        if (cur.left.isDown){
+            body.velocity.x = -this.vel.x;
+            this.player.scale.x = -this.scale.x;
         }
 
 
