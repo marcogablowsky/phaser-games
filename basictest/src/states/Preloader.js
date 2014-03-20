@@ -31,6 +31,8 @@ MagGame.Preloader.prototype = {
 		//	Here we load the rest of the assets our game needs.
         this.loadMapResources();
         this.game.load.image('player', 'images/player.png');
+
+        this.load.audio('brinstar', ['audio/metroid_brinstar.mp3']);
 	},
 
 	create: function () {
@@ -50,15 +52,11 @@ MagGame.Preloader.prototype = {
 		
 		//	If you don't have any music in your game then put the game.state.start line into the create function and delete
 		//	the update function completely.
-
-        this.ready = true;
-        this.game.state.start('Game');
-
-		//if (this.cache.isSoundDecoded('titleMusic') && this.ready == false)
-		//{
-		//	this.ready = true;
-		//	this.game.state.start('MainMenu');
-    	//}
+		if (this.cache.isSoundDecoded('brinstar') && this.ready == false)
+		{
+			this.ready = true;
+			this.game.state.start('Game');
+    	}
     }
 
 };
