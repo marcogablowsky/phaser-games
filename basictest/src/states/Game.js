@@ -35,7 +35,7 @@ MagGame.Game.prototype = {
         //  The second parameter maps this name to the Phaser.Cache key 'tiles'
         this.map.addTilesetImage('basictiles16x16', 'tiles');
 
-        this.map.setCollisionBetween(0, 7);
+        this.map.setCollisionBetween(0, 15);
         //  Creates a layer from the World1 layer in the map data.
         //  A Layer is effectively like a Phaser.Sprite, so is added to the display list.
         this.layer = this.map.createLayer('main');

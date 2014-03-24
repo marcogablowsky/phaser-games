@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" width="32" height="30" tilewidth="16" tileheight="16">
  <tileset firstgid="1" name="basictiles16x16" tilewidth="16" tileheight="16">
-  <image source="tilesets/basictiles16x16.png" width="128" height="16"/>
+  <image source="tilesets/basictiles16x16.png" width="128" height="32"/>
  </tileset>
  <layer name="main" width="32" height="30">
   <data encoding="base64" compression="zlib">
-   eJzNVu0KgDAIlBjs/d+4PwVDTG9qTkEqprub+bFJRLOpVkhHfCKMQ0b8NL9IDFAef8fcOl/Vf5Ykgp+Rt158y8+Te19rQ1Bkf9RGw0ZjnN3nBsA9Q6J1F62daP1V4L85J31n4Z+ap9Wzriv+SezsXrIzE9Dz8xrYle75Fz1fBNvCR2aFl3u0Z2T0n/X9ehTJh9Xe8kPwNTuNA5rDHixug/Kb7Ily4mvS3cu6f3E/y/a03l2UCLQ=
+   eJzNltEKwCAIRYU9BLH//969NBgS3VvXWYIwZnLURCtmVg7VDDmRb8bFoNYP+Sk1YOLIqDnKL+uee6Lw1b5Vas7cK7KhmN//d0fZ3kZ2xGZrHD3nsvoS5cP4R/AV/7/5o5kRxc/SEX+HnMLfyY6eJTM7gc3/aroqp/efmp/CRnx0j0rs6syImD/f79qU3T3V6Wyfr+49f57dI7Os0e5hWLMxeVvv7YXeX94Pnd2tD5bHCZo=
   </data>
  </layer>
 </map>
