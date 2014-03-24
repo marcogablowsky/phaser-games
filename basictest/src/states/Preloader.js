@@ -11,7 +11,7 @@ MagGame.Preloader = function (game) {
 MagGame.Preloader.prototype = {
 
     loadMapResources: function(){
-        this.game.load.tilemap('testmap', 'maps/basic.json', null, Phaser.Tilemap.TILED_JSON);
+        this.game.load.tilemap('testmap', 'maps/simple.json', null, Phaser.Tilemap.TILED_JSON);
         //  Next we load the tileset. This is just an image, loaded in via the normal way we load images:
         this.game.load.image('tiles', 'maps/tilesets/basictiles16x16.png');
     },

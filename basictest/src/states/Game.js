@@ -19,7 +19,7 @@ MagGame.Game = function (game) {
     this.physics;	//	the physics manager
     this.rnd;		//	the repeatable random number generator
 
-    this.vel = {x: 150, y:-450, max: -250, inc: -20},
+    this.vel = {x: 150, y:-270},
     this.scale = {x: 1, y: 1}
 
     //	You can use any of these from any function within this State.
@@ -46,7 +46,7 @@ MagGame.Game.prototype = {
     },
 
     createPlayer: function(){
-        this.player = this.game.add.sprite(40, 450, 'player');
+        this.player = this.game.add.sprite(40, 400, 'player');
         //What is this? Causes slowdown walking right
         //this.player.body.linearDamping = 1;
         this.player.body.collideWorldBounds = true;
@@ -76,29 +76,15 @@ MagGame.Game.prototype = {
 
         if (body.blocked.down){
             body.gravity.y = 200;
-            this.player.cancelJump = false;
         }
         else{
             body.gravity.y = 600;
         }
 
-        if(cur.down.isDown){
-            this.player.scale.y = this.scale.y / 2;
-        }
-
         if (cur.up.isDown){
-            this.player.scale.y = this.scale.y;
             if(this.player.body.blocked.down){
-                // initial jump
-                body.velocity.y = -200;
-            }else if(body.velocity.y > this.vel.max && !this.player.cancelJump){
-                // increase jump height
-                body.velocity.y = body.velocity.y + this.vel.inc;
-            }else{
-                // maximum height reached
-                this.player.cancelJump = true;
+                body.velocity.y = this.vel.y;
             }
-
         }
         if (cur.right.isDown){
             body.velocity.x = this.vel.x;
