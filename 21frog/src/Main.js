@@ -18,22 +18,22 @@ MAG.Frog21 = {
         device: {
             desktop: {
                 minWidth: 480,
-                minHeight: 260,
-                maxWidth: 1024,
-                maxHeight: 768,
+                minHeight: 272,
+                maxWidth: 1920,
+                maxHeight: 1080,
                 scaleMode: Phaser.ScaleManager.SHOW_ALL
             },
             other: {
                 minWidth: 480,
-                minHeight: 260,
-                maxWidth: 1024,
-                maxHeight: 768,
+                minHeight: 272,
+                maxWidth: 1920,
+                maxHeight: 1080,
                 scaleMode: Phaser.ScaleManager.SHOW_ALL
             }
         },
 
         debug: {
-
+            renderTouchAreas: true
         }
     }
 };
