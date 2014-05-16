@@ -1,5 +1,5 @@
 
-Frog21.Preloader = function (game) {
+MAG.Frog21.Preloader = function (game) {
 
 	this.background = null;
 	this.preloadBar = null;
@@ -8,7 +8,7 @@ Frog21.Preloader = function (game) {
 
 };
 
-Frog21.Preloader.prototype = {
+MAG.Frog21.Preloader.prototype = {
 
 	preload: function () {
 

@@ -1,12 +1,12 @@
 
-Frog21.MainMenu = function (game) {
+MAG.Frog21.MainMenu = function (game) {
 
 	this.music = null;
 	this.playButton = null;
 
 };
 
-Frog21.MainMenu.prototype = {
+MAG.Frog21.MainMenu.prototype = {
 
 	create: function () {
 

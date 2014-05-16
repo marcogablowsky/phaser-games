@@ -1,8 +1,7 @@
 
-Frog21.Game = function (game) {
-
+MAG.Frog21.Game = function (game) {
+/*
 	//	When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
-
     this.game;		//	a reference to the currently running game
     this.add;		//	used to add sprites, text, groups, etc
     this.camera;	//	a reference to the game camera
@@ -18,34 +17,39 @@ Frog21.Game = function (game) {
     this.particles;	//	the particle manager
     this.physics;	//	the physics manager
     this.rnd;		//	the repeatable random number generator
-
+*/
     //	You can use any of these from any function within this State.
     //	But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
-
+    this.gameConfig = MAG.Frog21.gameConfig;
+    this.gameOver = false;
 };
 
-Frog21.Game.prototype = {
+MAG.Frog21.Game.prototype = {
+
+    quitGame: function (pointer) {
+        //	Here you should destroy anything you no longer need.
+        //	Stop music, delete sprites, purge caches, free resources, all that good stuff.
+
+        //	Then let's go back to the main menu.
+        this.state.start('MainMenu');
+    },
+
+    shallQuit: function(){
+        if(this.gameOver){
+            return true;
+        }else{
+            return false;
+        }
+    },
 
 	create: function () {
-
-		//	Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
-
+        this.physics.startSystem(this.gameConfig.physics);
 	},
 
 	update: function () {
-
-		//	Honestly, just about anything could go here. It's YOUR game after all. Eat your heart out!
-
-	},
-
-	quitGame: function (pointer) {
-
-		//	Here you should destroy anything you no longer need.
-		//	Stop music, delete sprites, purge caches, free resources, all that good stuff.
-
-		//	Then let's go back to the main menu.
-		this.state.start('MainMenu');
-
+        if(this.shallQuit()){
+            this.quitGame();
+        }
 	}
 
 };

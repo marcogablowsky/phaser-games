@@ -1,20 +1,10 @@
-Frog21 = {
 
-    /* Here we've just got some global level vars that persist regardless of State swaps */
-    score: 0,
-
-    /* If the music in your game needs to play through-out a few State swaps, then you could reference it here */
-    music: null,
-
-    /* Your game can check Frog21.orientated in internal loops to know if it should pause or not */
-    orientated: false
-
+MAG.Frog21.Boot = function (game) {
+    this.desktopDevice = MAG.Frog21.gameConfig.device.desktop;
+    this.otherDevices = MAG.Frog21.gameConfig.device.other;
 };
 
-Frog21.Boot = function (game) {
-};
-
-Frog21.Boot.prototype = {
+MAG.Frog21.Boot.prototype = {
 
     preload: function () {
 
@@ -23,30 +13,23 @@ Frog21.Boot.prototype = {
        // this.load.image('preloaderBar', 'images/preloadr_bar.png');
 
     },
-
-    create: function () {
-
-        this.input.maxPointers = 1;
-        this.stage.disableVisibilityChange = true;
-
-        if (this.game.device.desktop)
-        {
-            this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-            this.scale.minWidth = 480;
-            this.scale.minHeight = 260;
-            this.scale.maxWidth = 1024;
-            this.scale.maxHeight = 768;
+    setMinMaxDimensions: function(source) {
+        this.scale.minWidth = source.minWidth;
+        this.scale.minHeight = source.minHeight;
+        this.scale.maxWidth = source.maxWidth;
+        this.scale.maxHeight = source.maxHeight;
+    },
+    setupDevice: function () {
+        if (this.game.device.desktop) {
+            this.scale.scaleMode = this.desktopDevice.scaleMode;
+            this.setMinMaxDimensions(this.desktopDevice);
             this.scale.pageAlignHorizontally = true;
             this.scale.pageAlignVertically = true;
             this.scale.setScreenSize(true);
         }
-        else
-        {
-            this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-            this.scale.minWidth = 480;
-            this.scale.minHeight = 260;
-            this.scale.maxWidth = 1024;
-            this.scale.maxHeight = 768;
+        else {
+            this.scale.scaleMode = this.otherDevices.scaleMode;
+            this.setMinMaxDimensions(this.otherDevices);
             this.scale.pageAlignHorizontally = true;
             this.scale.pageAlignVertically = true;
             this.scale.forceOrientation(true, false);
@@ -55,32 +38,28 @@ Frog21.Boot.prototype = {
             this.scale.leaveIncorrectOrientation.add(this.leaveIncorrectOrientation, this);
             this.scale.setScreenSize(true);
         }
+    },
 
+    create: function () {
+        this.input.maxPointers = 1;
+        this.stage.disableVisibilityChange = true;
+        this.setupDevice();
         this.state.start('Preloader');
-
     },
 
     gameResized: function (width, height) {
-
         //  This could be handy if you need to do any extra processing if the game resizes.
         //  A resize could happen if for example swapping orientation on a device.
-
     },
 
     enterIncorrectOrientation: function () {
-
-        Frog21.orientated = false;
-
+        MAG.Frog21.orientated = false;
         document.getElementById('orientation').style.display = 'block';
-
     },
 
     leaveIncorrectOrientation: function () {
-
-        Frog21.orientated = true;
-
+        MAG.Frog21.orientated = true;
         document.getElementById('orientation').style.display = 'none';
-
     }
 
 };
