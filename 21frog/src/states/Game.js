@@ -43,7 +43,7 @@ MAG.Frog21.Game.prototype = {
 
     create: function () {
         this.physics.startSystem(this.gameConfig.physics);
-        this.physics.arcade.gravity.y = 200;
+        this.physics.arcade.gravity.y = 2600;
 
         /* Prevent defaults in Browser */
         this.game.input.keyboard.addKeyCapture([
@@ -53,14 +53,28 @@ MAG.Frog21.Game.prototype = {
             Phaser.Keyboard.DOWN
         ]);
 
+        // Create some ground for the player to walk on
+        this.ground = this.game.add.group();
+        for(var x = 0; x < this.game.width; x += 40) {
+            // Add the ground blocks, enable physics on each, make them immovable
+            var groundBlock = this.game.add.sprite(x, this.game.height - 2, 'ground');
+            this.game.physics.enable(groundBlock, Phaser.Physics.ARCADE);
+            groundBlock.body.immovable = true;
+            groundBlock.body.allowGravity = false;
+            this.ground.add(groundBlock);
+        }
+
         this.player = new MAG.Frog21.Player(this.game, 200, this.game.height - 40);
-        console.log(this.player.sprite.width);
     },
 
     update: function () {
         if (this.shallQuit()) {
             this.quitGame();
         }
+
+        // Collide the player with the ground
+        this.game.physics.arcade.collide(this.player.sprite, this.ground);
+
         this.player.update();
     },
 
