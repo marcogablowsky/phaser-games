@@ -43,6 +43,12 @@ MAG.Frog21.Game.prototype = {
 
     create: function () {
         this.physics.startSystem(this.gameConfig.physics);
+        this.physics.arcade.gravity.y = 200;
+
+        var player = this.game.add.sprite(200,200, 'frog');
+        player.anchor.set(0.5);
+        this.game.physics.enable(player, Phaser.Physics.ARCADE);
+        player.body.collideWorldBounds = true;
     },
 
     update: function () {
