@@ -45,16 +45,23 @@ MAG.Frog21.Game.prototype = {
         this.physics.startSystem(this.gameConfig.physics);
         this.physics.arcade.gravity.y = 200;
 
-        var player = this.game.add.sprite(200,200, 'frog');
-        player.anchor.set(0.5);
-        this.game.physics.enable(player, Phaser.Physics.ARCADE);
-        player.body.collideWorldBounds = true;
+        /* Prevent defaults in Browser */
+        this.game.input.keyboard.addKeyCapture([
+            Phaser.Keyboard.LEFT,
+            Phaser.Keyboard.RIGHT,
+            Phaser.Keyboard.UP,
+            Phaser.Keyboard.DOWN
+        ]);
+
+        this.player = new MAG.Frog21.Player(this.game, 200, this.game.height - 40);
+        console.log(this.player.sprite.width);
     },
 
     update: function () {
         if (this.shallQuit()) {
             this.quitGame();
         }
+        this.player.update();
     },
 
     render: function () {
