@@ -31,7 +31,8 @@
 	<link rel="apple-touch-icon" sizes="512x512" href="icons/app_icon_512x512.png">
 	<link rel="apple-touch-icon" sizes="1024x1024" href="icons/app_icon_1024x1024.png">
 	<link rel="stylesheet" href="css/stylesheet.css" type="text/css" charset="utf-8" />
-	<script src="js/phaser.js"></script>
+
+    <script src="bower_components/phaser/phaser.js"></script>
 
     <script src="src/Main.js"></script>
 
@@ -50,7 +51,7 @@
 
 <script type="text/javascript">
 
-(function () {
+var mygame = (function () {
 
 	//	Create your Phaser game and inject it into the game div.
 	//	We did it in a window.onload event, but you can do it anywhere (requireJS load, anonymous function, jQuery dom ready, - whatever floats your boat)
@@ -66,7 +67,7 @@
 
 	//	Now start the Boot state.
 	game.state.start('Boot');
-
+    return game;
 })();
 </script>
 

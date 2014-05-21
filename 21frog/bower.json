@@ -1,0 +1,20 @@
+{
+  "name": "frog21",
+  "version": "1.0.0",
+  "authors": [],
+  "description": "21st century frog",
+  "license": "",
+  "homepage": "http://www.github.com/marcogablowsky",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "phaser": "2.0.4"
+  },
+  "devDependencies": {
+
+  }
+}
