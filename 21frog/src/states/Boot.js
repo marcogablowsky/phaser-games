@@ -1,5 +1,4 @@
-
-MAG.Frog21.Boot = function (game) {
+MAG.Frog21.Boot = function () {
     this.desktopDevice = MAG.Frog21.gameConfig.device.desktop;
     this.otherDevices = MAG.Frog21.gameConfig.device.other;
 };
@@ -7,18 +6,18 @@ MAG.Frog21.Boot = function (game) {
 MAG.Frog21.Boot.prototype = {
 
     preload: function () {
-
         //  Here we load the assets required for our preloader (in this case a background and a loading bar)
-       // this.load.image('preloaderBackground', 'images/preloader_background.jpg');
-       // this.load.image('preloaderBar', 'images/preloadr_bar.png');
-
+        // this.load.image('preloaderBackground', 'images/preloader_background.jpg');
+        // this.load.image('preloaderBar', 'images/preloadr_bar.png');
     },
-    setMinMaxDimensions: function(source) {
+
+    setMinMaxDimensions: function (source) {
         this.scale.minWidth = source.minWidth;
         this.scale.minHeight = source.minHeight;
         this.scale.maxWidth = source.maxWidth;
         this.scale.maxHeight = source.maxHeight;
     },
+
     setupDevice: function () {
         if (this.game.device.desktop) {
             this.scale.scaleMode = this.desktopDevice.scaleMode;

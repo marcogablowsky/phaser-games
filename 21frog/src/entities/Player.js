@@ -1,23 +1,23 @@
+MAG.Frog21.Player = function (game, x, y) {
+    var config = MAG.Frog21.gameConfig;
 
-MAG.Frog21.Player = function(game, x, y){
     this.game = game;
-    this.cursors = null;
-    this.sprite = this.game.add.sprite(x,y, 'frog');
+    this.sprite = this.game.add.sprite(x, y, 'frog');
     this.sprite.anchor.set(0.5);
-    this.game.physics.enable(this.sprite, Phaser.Physics.ARCADE);
+    this.game.physics.enable(this.sprite, config.physics);
     this.sprite.body.collideWorldBounds = true;
 
     // define movement constants here
     this.JUMP_SPEED = -1000;
 };
 
-MAG.Frog21.Player.preload = function(game){
+MAG.Frog21.Player.preload = function (game) {
     game.load.image('frog', 'assets/frog2.png');
 };
 
 MAG.Frog21.Player.prototype = {
 
-    update: function(){
+    update: function () {
         var onTheGround = this.sprite.body.touching.down;
 
         if (onTheGround && this.upInputIsActive()) {
@@ -26,7 +26,7 @@ MAG.Frog21.Player.prototype = {
         }
     },
 
-    upInputIsActive: function(){
+    upInputIsActive: function () {
         var isActive = this.game.input.keyboard.justPressed(Phaser.Keyboard.UP);
         isActive |= (this.game.input.activePointer.justPressed());
 

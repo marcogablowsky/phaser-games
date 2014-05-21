@@ -1,4 +1,4 @@
-MAG.Frog21.Game = function (game) {
+MAG.Frog21.Game = function () {
     /*
      //	When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
      this.game;		//	a reference to the currently running game
@@ -25,7 +25,7 @@ MAG.Frog21.Game = function (game) {
 
 MAG.Frog21.Game.prototype = {
 
-    quitGame: function (pointer) {
+    quitGame: function () {
         //	Here you should destroy anything you no longer need.
         //	Stop music, delete sprites, purge caches, free resources, all that good stuff.
 
@@ -55,7 +55,7 @@ MAG.Frog21.Game.prototype = {
 
         // Create some ground for the player to walk on
         this.ground = this.game.add.group();
-        for(var x = 0; x < this.game.width; x += 40) {
+        for (var x = 0; x < this.game.width; x += 40) {
             // Add the ground blocks, enable physics on each, make them immovable
             var groundBlock = this.game.add.sprite(x, this.game.height - 2, 'ground');
             this.game.physics.enable(groundBlock, Phaser.Physics.ARCADE);
