@@ -1,4 +1,5 @@
 MAG.Frog21.Player = function (game, x, y) {
+    'use strict';
     var config = MAG.Frog21.gameConfig;
 
     this.game = game;
@@ -6,30 +7,52 @@ MAG.Frog21.Player = function (game, x, y) {
     this.sprite.anchor.set(0.5);
     this.game.physics.enable(this.sprite, config.physics);
     this.sprite.body.collideWorldBounds = true;
+    this.sprite.body.bounce.x = 1.0;
 
-    // define movement constants here
-    this.JUMP_SPEED = -1000;
+    this.velocity = {x: 150, y: -400};
 };
 
 MAG.Frog21.Player.preload = function (game) {
+    "use strict";
     game.load.image('frog', 'assets/frog2.png');
 };
 
 MAG.Frog21.Player.prototype = {
 
     update: function () {
+        "use strict";
+        var input = this.game.input;
         var onTheGround = this.sprite.body.touching.down;
 
-        if (onTheGround && this.upInputIsActive()) {
-            // Jump when the player is touching the ground and the up arrow is pressed
-            this.sprite.body.velocity.y = this.JUMP_SPEED;
+        if (onTheGround) {
+            this.sprite.body.velocity.x = 0;
+        }
+
+        if (onTheGround && input.activePointer.justPressed()) {
+            var body = this.sprite.body;
+            var factorX = this.calculateFactorX(input.activePointer.x);
+            var factorY = this.calculateFactorY(input.activePointer.y);
+            console.log('X:' + factorX + ' ; y:' + factorY);
+            this.sprite.body.velocity.x = factorX * this.velocity.x;
+            this.sprite.body.velocity.y = factorY * this.velocity.y;
+            console.log('VelX:' + body.velocity.x + ' ; VelY:' + body.velocity.y);
         }
     },
 
-    upInputIsActive: function () {
-        var isActive = this.game.input.keyboard.justPressed(Phaser.Keyboard.UP);
-        isActive |= (this.game.input.activePointer.justPressed());
+    calculateFactorX: function (coordX) {
+        "use strict";
+        var ref = this.game.width / 10;
+        var factor = Math.ceil(coordX / ref);
+        if (factor > 5) {
+            return factor - 5;
+        } else {
+            return -(6 - factor);
+        }
+    },
 
-        return isActive;
+    calculateFactorY: function (coordY) {
+        "use strict";
+        var ref = this.game.height / 4;
+        return 5 - Math.ceil(coordY / ref);
     }
 };
