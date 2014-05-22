@@ -1,6 +1,6 @@
-
+var NAMESPACE = NAMESPACE;
 NAMESPACE.GameName.MainMenu = function (game) {
-
+    'use strict';
 	this.music = null;
 	this.playButton = null;
 
@@ -9,7 +9,7 @@ NAMESPACE.GameName.MainMenu = function (game) {
 NAMESPACE.GameName.MainMenu.prototype = {
 
 	create: function () {
-
+        'use strict';
 		//	We've already preloaded our assets, so let's kick right into the Main Menu itself.
 		//	Here all we're doing is playing some music and adding a picture and button
 		//	Naturally I expect you to do something significantly better :)
@@ -25,13 +25,13 @@ NAMESPACE.GameName.MainMenu.prototype = {
 	},
 
 	update: function () {
-
+        'use strict';
 		//	Do some nice funky main menu effect here
 
 	},
 
 	startGame: function (pointer) {
-
+        'use strict';
 		//	Ok, the Play Button has been clicked or touched, so let's stop the music (otherwise it'll carry on playing)
 		//this.music.stop();
 

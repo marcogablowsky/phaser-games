@@ -1,6 +1,6 @@
-
+var NAMESPACE = NAMESPACE;
 NAMESPACE.GameName.Preloader = function (game) {
-
+    'use strict';
 	this.background = null;
 	this.preloadBar = null;
 
@@ -11,7 +11,7 @@ NAMESPACE.GameName.Preloader = function (game) {
 NAMESPACE.GameName.Preloader.prototype = {
 
 	preload: function () {
-
+        'use strict';
 		//	These are the assets we loaded in Boot.js
 		//	A nice sparkly background and a loading progress bar
 		//this.background = this.add.sprite(0, 0, 'preloaderBackground');
@@ -33,14 +33,14 @@ NAMESPACE.GameName.Preloader.prototype = {
 	},
 
 	create: function () {
-
+        'use strict';
 		//	Once the load has finished we disable the crop because we're going to sit in the update loop for a short while as the music decodes
 		//this.preloadBar.cropEnabled = false;
 
 	},
 
 	update: function () {
-
+        'use strict';
 		//	You don't actually need to do this, but I find it gives a much smoother game experience.
 		//	Basically it will wait for our audio file to be decoded before proceeding to the MainMenu.
 		//	You can jump right into the menu if you want and still play the music, but you'll have a few

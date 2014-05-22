@@ -1,4 +1,6 @@
+var NAMESPACE = NAMESPACE;
 NAMESPACE.GameName.Game = function (game) {
+    'use strict';
     /*
      //	When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
      this.game;		//	a reference to the currently running game
@@ -26,6 +28,7 @@ NAMESPACE.GameName.Game = function (game) {
 NAMESPACE.GameName.Game.prototype = {
 
     quitGame: function (pointer) {
+        'use strict';
         //	Here you should destroy anything you no longer need.
         //	Stop music, delete sprites, purge caches, free resources, all that good stuff.
 
@@ -34,6 +37,7 @@ NAMESPACE.GameName.Game.prototype = {
     },
 
     shallQuit: function () {
+        'use strict';
         if (this.gameOver) {
             return true;
         } else {
@@ -42,16 +46,19 @@ NAMESPACE.GameName.Game.prototype = {
     },
 
     create: function () {
+        'use strict';
         this.physics.startSystem(this.gameConfig.physics);
     },
 
     update: function () {
+        'use strict';
         if (this.shallQuit()) {
             this.quitGame();
         }
     },
 
     render: function () {
+        'use strict';
         // do some debug rendering
     }
 };
