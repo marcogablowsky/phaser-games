@@ -1,4 +1,6 @@
+var MAG = MAG;
 MAG.Frog21.Game = function () {
+    'use strict';
     /*
      //	When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
      this.game;		//	a reference to the currently running game
@@ -24,8 +26,8 @@ MAG.Frog21.Game = function () {
 };
 
 MAG.Frog21.Game.prototype = {
-
     quitGame: function () {
+        'use strict';
         //	Here you should destroy anything you no longer need.
         //	Stop music, delete sprites, purge caches, free resources, all that good stuff.
 
@@ -34,6 +36,7 @@ MAG.Frog21.Game.prototype = {
     },
 
     shallQuit: function () {
+        'use strict';
         if (this.gameOver) {
             return true;
         } else {
@@ -42,6 +45,7 @@ MAG.Frog21.Game.prototype = {
     },
 
     create: function () {
+        'use strict';
         this.physics.startSystem(this.gameConfig.physics);
         this.physics.arcade.gravity.y = 2600;
 
@@ -68,23 +72,24 @@ MAG.Frog21.Game.prototype = {
     },
 
     update: function () {
+        'use strict';
         if (this.shallQuit()) {
             this.quitGame();
         }
 
-        // Collide the player with the ground
         this.game.physics.arcade.collide(this.player.sprite, this.ground);
-
         this.player.update();
     },
 
     render: function () {
+        'use strict';
         if (this.gameConfig.debug.renderTouchAreas) {
             this.renderTouchAreas();
         }
     },
 
     renderTouchAreas: function () {
+        'use strict';
         var touchWidth = this.game.width / 10;
         var touchHeight = this.game.height / 4;
 
@@ -93,10 +98,8 @@ MAG.Frog21.Game.prototype = {
 
         for (row = 0; row < 4; row++) {
             for (col = 0; col < 10; col++) {
-
-                this.game.debug.geom(new Phaser.Rectangle(col * touchWidth, row * touchHeight, touchWidth, touchHeight), 'rgba(0,255,0,1)', false)
+                this.game.debug.geom(new Phaser.Rectangle(col * touchWidth, row * touchHeight, touchWidth, touchHeight), 'rgba(0,255,0,1)', false);
             }
         }
     }
-
 };

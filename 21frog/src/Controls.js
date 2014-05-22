@@ -1,11 +1,11 @@
+var MAG = MAG;
 MAG.Frog21.Controls = {};
 
 MAG.Frog21.Controls.keyDownCallback = function (event) {
-    "use strict";
+    'use strict';
     var key = event.keyCode;
     var factors;
 
-    console.log('Keycode:' + key);
     switch (key) {
         // first row
     case Phaser.Keyboard.ONE:
@@ -139,4 +139,4 @@ MAG.Frog21.Controls.keyDownCallback = function (event) {
         this.sprite.body.velocity.x = factors.x * this.velocity.x;
         this.sprite.body.velocity.y = factors.y * this.velocity.y;
     }
-}
+};

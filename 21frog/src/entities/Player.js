@@ -1,3 +1,4 @@
+var MAG = MAG;
 MAG.Frog21.Player = function (game, x, y) {
     'use strict';
     var config = MAG.Frog21.gameConfig;
@@ -14,14 +15,13 @@ MAG.Frog21.Player = function (game, x, y) {
 };
 
 MAG.Frog21.Player.preload = function (game) {
-    "use strict";
+    'use strict';
     game.load.image('frog', 'assets/frog2.png');
 };
 
 MAG.Frog21.Player.prototype = {
-
     update: function () {
-        "use strict";
+        'use strict';
         var input = this.game.input;
         var onTheGround = this.sprite.body.touching.down;
 
@@ -41,7 +41,7 @@ MAG.Frog21.Player.prototype = {
     },
 
     calculateFactorX: function (coordX) {
-        "use strict";
+        'use strict';
         var ref = this.game.width / 10;
         var factor = Math.ceil(coordX / ref);
         if (factor > 5) {
@@ -52,7 +52,7 @@ MAG.Frog21.Player.prototype = {
     },
 
     calculateFactorY: function (coordY) {
-        "use strict";
+        'use strict';
         var ref = this.game.height / 4;
         return 5 - Math.ceil(coordY / ref);
     }
