@@ -1,6 +1,6 @@
 var MAG = MAG;
 
-MAG.Phaser = {};
+MAG.Phaser = MAG.Phaser || {};
 
 MAG.Phaser.EntityManager = function () {
     'use strict';

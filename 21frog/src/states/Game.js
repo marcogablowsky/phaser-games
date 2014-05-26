@@ -57,14 +57,7 @@ MAG.Frog21.Game.prototype = {
         ]);
     },
 
-    create: function () {
-        'use strict';
-        this.physics.startSystem(this.gameConfig.physics.constant);
-        this.physics[this.gameConfig.physics.name].gravity.y = 2600;
-        this.configureKeyCapture();
-
-        this.entityManager.addEntity('player', new MAG.Frog21.Player(this.game, 200, this.game.height - 40));
-
+    createGround: function () {
         // Create some ground for the player to walk on
         this.ground = this.game.add.group();
         for (var x = 0; x < this.game.width; x += 40) {
@@ -77,18 +70,57 @@ MAG.Frog21.Game.prototype = {
         }
     },
 
+    create: function () {
+        'use strict';
+        this.physics.startSystem(this.gameConfig.physics.constant);
+        //this.physics[this.gameConfig.physics.name].gravity.y = 2600;
+        this.configureKeyCapture();
+
+        this.entityManager.addEntity('player', new MAG.Frog21.Player(this.game, 200, this.game.height - 40));
+        this.createGround();
+
+        this.flies = this.game.add.group();
+
+        for (var i = 0; i < 50; i++) {
+            var s = this.flies.create(this.game.rnd.integerInRange(100, 700), this.game.rnd.integerInRange(16, 350), 'fly');
+            this.game.physics.enable(s, Phaser.Physics.ARCADE);
+            s.body.velocity.x = this.game.rnd.integerInRange(-400, 400);
+            s.body.velocity.y = this.game.rnd.integerInRange(-400, 400);
+            s.body.enableBodyDebug = true;
+        }
+
+        this.flies.setAll('body.collideWorldBounds', true);
+        this.flies.setAll('body.bounce.x', 1);
+        this.flies.setAll('body.bounce.y', 1);
+        this.flies.setAll('body.minBounceVelocity', 0);
+    },
+
+    eatFly: function (player, fly) {
+        if (!player.sprite.body.touching.down) {
+            fly.kill();
+        }
+    },
+
     update: function () {
         'use strict';
         if (this.shallQuit()) {
             this.quitGame();
         }
 
-        this.game.physics.arcade.collide(this.entityManager.findByName('player').sprite, this.ground);
+        var player = this.entityManager.findByName('player');
+
+        this.game.physics.arcade.collide(this.flies);
+        this.game.physics.arcade.collide(player.sprite, this.ground);
+
+        this.game.physics.arcade.overlap(this.flies, player, this.eatFly, null, this);
+
         this.entityManager.update();
     },
 
     render: function () {
         'use strict';
+
+        this.game.debug.body(this.flies);
         if (this.gameConfig.debug.renderTouchAreas) {
             this.renderTouchAreas();
         }

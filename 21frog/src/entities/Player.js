@@ -9,6 +9,7 @@ MAG.Frog21.Player = function (game, x, y) {
     this.game.physics.enable(this.sprite, config.physics.constant);
     this.sprite.body.collideWorldBounds = true;
     this.sprite.body.bounce.x = 1.0;
+    this.sprite.body.gravity.y = 2600;
     this.game.input.keyboard.addCallbacks(this, MAG.Frog21.controls.keyDownCallback);
 
     this.velocity = {x: 150, y: -400};

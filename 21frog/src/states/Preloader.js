@@ -24,6 +24,7 @@ MAG.Frog21.Preloader.prototype = {
         //	Here we load the rest of the assets our game needs.
         MAG.Frog21.Player.preload(this);
         this.load.image('ground', 'assets/ground.png');
+        this.load.image('fly', 'assets/fly.png');
     },
 
     create: function () {
