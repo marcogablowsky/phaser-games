@@ -24,7 +24,7 @@ MAG.Frog21.Game = function () {
     this.gameConfig = MAG.Frog21.gameConfig;
     this.gameOver = false;
 
-    this.entityManager = new MAG.Frog21.EntityManager();
+    this.entityManager = new MAG.Phaser.EntityManager();
 };
 
 MAG.Frog21.Game.prototype = {
@@ -63,7 +63,7 @@ MAG.Frog21.Game.prototype = {
         this.physics[this.gameConfig.physics.name].gravity.y = 2600;
         this.configureKeyCapture();
 
-        this.entityManager.addEntity('player',new MAG.Frog21.Player(this.game, 200, this.game.height - 40));
+        this.entityManager.addEntity('player', new MAG.Frog21.Player(this.game, 200, this.game.height - 40));
 
         // Create some ground for the player to walk on
         this.ground = this.game.add.group();

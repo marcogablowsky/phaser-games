@@ -9,14 +9,14 @@ MAG.Frog21.Player = function (game, x, y) {
     this.game.physics.enable(this.sprite, config.physics.constant);
     this.sprite.body.collideWorldBounds = true;
     this.sprite.body.bounce.x = 1.0;
-    this.game.input.keyboard.addCallbacks(this, MAG.Frog21.Controls.keyDownCallback);
+    this.game.input.keyboard.addCallbacks(this, MAG.Frog21.controls.keyDownCallback);
 
     this.velocity = {x: 150, y: -400};
 };
 
 MAG.Frog21.Player.preload = function (game) {
     'use strict';
-    game.load.image('frog', 'assets/frog2.png');
+    game.load.image('frog', 'assets/frog.png');
 };
 
 MAG.Frog21.Player.prototype = {
