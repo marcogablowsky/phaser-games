@@ -6,7 +6,7 @@ MAG.Frog21.Player = function (game, x, y) {
     this.game = game;
     this.sprite = this.game.add.sprite(x, y, 'frog');
     this.sprite.anchor.set(0.5);
-    this.game.physics.enable(this.sprite, config.physics);
+    this.game.physics.enable(this.sprite, config.physics.constant);
     this.sprite.body.collideWorldBounds = true;
     this.sprite.body.bounce.x = 1.0;
     this.game.input.keyboard.addCallbacks(this, MAG.Frog21.Controls.keyDownCallback);
@@ -30,13 +30,10 @@ MAG.Frog21.Player.prototype = {
         }
 
         if (onTheGround && input.activePointer.justPressed()) {
-            var body = this.sprite.body;
             var factorX = this.calculateFactorX(input.activePointer.x);
             var factorY = this.calculateFactorY(input.activePointer.y);
-            console.log('X:' + factorX + ' ; y:' + factorY);
             this.sprite.body.velocity.x = factorX * this.velocity.x;
             this.sprite.body.velocity.y = factorY * this.velocity.y;
-            console.log('VelX:' + body.velocity.x + ' ; VelY:' + body.velocity.y);
         }
     },
 

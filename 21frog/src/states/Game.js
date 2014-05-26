@@ -23,6 +23,8 @@ MAG.Frog21.Game = function () {
     //	But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
     this.gameConfig = MAG.Frog21.gameConfig;
     this.gameOver = false;
+
+    this.entityManager = new MAG.Frog21.EntityManager();
 };
 
 MAG.Frog21.Game.prototype = {
@@ -44,11 +46,8 @@ MAG.Frog21.Game.prototype = {
         }
     },
 
-    create: function () {
+    configureKeyCapture: function () {
         'use strict';
-        this.physics.startSystem(this.gameConfig.physics);
-        this.physics.arcade.gravity.y = 2600;
-
         /* Prevent defaults in Browser */
         this.game.input.keyboard.addKeyCapture([
             Phaser.Keyboard.LEFT,
@@ -56,6 +55,15 @@ MAG.Frog21.Game.prototype = {
             Phaser.Keyboard.UP,
             Phaser.Keyboard.DOWN
         ]);
+    },
+
+    create: function () {
+        'use strict';
+        this.physics.startSystem(this.gameConfig.physics.constant);
+        this.physics[this.gameConfig.physics.name].gravity.y = 2600;
+        this.configureKeyCapture();
+
+        this.entityManager.addEntity('player',new MAG.Frog21.Player(this.game, 200, this.game.height - 40));
 
         // Create some ground for the player to walk on
         this.ground = this.game.add.group();
@@ -67,8 +75,6 @@ MAG.Frog21.Game.prototype = {
             groundBlock.body.allowGravity = false;
             this.ground.add(groundBlock);
         }
-
-        this.player = new MAG.Frog21.Player(this.game, 200, this.game.height - 40);
     },
 
     update: function () {
@@ -77,8 +83,8 @@ MAG.Frog21.Game.prototype = {
             this.quitGame();
         }
 
-        this.game.physics.arcade.collide(this.player.sprite, this.ground);
-        this.player.update();
+        this.game.physics.arcade.collide(this.entityManager.findByName('player').sprite, this.ground);
+        this.entityManager.update();
     },
 
     render: function () {

@@ -7,7 +7,10 @@ MAG.Frog21 = {
 
     /* define global engine settings */
     gameConfig: {
-        physics: Phaser.Physics.ARCADE,
+        physics: {
+            constant: Phaser.Physics.ARCADE,
+            name: 'arcade'
+        },
 
         device: {
             desktop: {
