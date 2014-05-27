@@ -58,6 +58,7 @@ MAG.Frog21.Game.prototype = {
     },
 
     createGround: function () {
+        'use strict';
         // Create some ground for the player to walk on
         this.ground = this.game.add.group();
         for (var x = 0; x < this.game.width; x += 40) {
@@ -96,7 +97,8 @@ MAG.Frog21.Game.prototype = {
     },
 
     eatFly: function (player, fly) {
-        if (!player.sprite.body.touching.down) {
+        'use strict';
+        if (!player.body.touching.down) {
             fly.kill();
         }
     },
@@ -112,7 +114,7 @@ MAG.Frog21.Game.prototype = {
         this.game.physics.arcade.collide(this.flies);
         this.game.physics.arcade.collide(player.sprite, this.ground);
 
-        this.game.physics.arcade.overlap(this.flies, player, this.eatFly, null, this);
+        this.game.physics.arcade.overlap(player.sprite, this.flies, this.eatFly, null, this);
 
         this.entityManager.update();
     },
