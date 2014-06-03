@@ -40,7 +40,7 @@ MagGame.Game.prototype = {
         this.createMap();
         this.createPlayer();
         this.cursors = this.game.input.keyboard.createCursorKeys();
-        this.music = this.add.audio('brinstar', 1, true);
+        //this.music = this.add.audio('brinstar', 1, true);
         //this.music.play('',0,1,true);
     },
 
@@ -85,7 +85,7 @@ MagGame.Game.prototype = {
         this.handleCollision();
         this.handleInput();
 
-        if (this.cursors.down.isDown) {
+        if (this.cursors.down.justReleased(20)) {
             this.boundsIndex++;
             if (this.boundsIndex >= this.worldBounds.length) {
                 this.boundsIndex = 0;
