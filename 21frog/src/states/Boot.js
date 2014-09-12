@@ -13,33 +13,27 @@ MAG.Frog21.Boot.prototype = {
         // this.load.image('preloaderBar', 'images/preloadr_bar.png');
     },
 
-    setMinMaxDimensions: function (source) {
-        'use strict';
-        this.scale.minWidth = source.minWidth;
-        this.scale.minHeight = source.minHeight;
-        this.scale.maxWidth = source.maxWidth;
-        this.scale.maxHeight = source.maxHeight;
-    },
-
     setupDevice: function () {
         'use strict';
         if (this.game.device.desktop) {
             this.scale.scaleMode = this.desktopDevice.scaleMode;
-            this.setMinMaxDimensions(this.desktopDevice);
+            this.scale.setMinMax(this.desktopDevice.minWidth,this.desktopDevice.minHeight, this.desktopDevice.maxWidth,this.desktopDevice.maxHeight);
             this.scale.pageAlignHorizontally = true;
             this.scale.pageAlignVertically = true;
             this.scale.setScreenSize(true);
+            this.scale.refresh();
         }
         else {
             this.scale.scaleMode = this.otherDevices.scaleMode;
-            this.setMinMaxDimensions(this.otherDevices);
+            this.scale.setMinMax(this.otherDevices.minWidth,this.otherDevices.minHeight, this.otherDevices.maxWidth,this.otherDevices.maxHeight);
             this.scale.pageAlignHorizontally = true;
             this.scale.pageAlignVertically = true;
             this.scale.forceOrientation(true, false);
-            this.scale.hasResized.add(this.gameResized, this);
+            this.scale.setResizeCallback(this.gameResized, this);
             this.scale.enterIncorrectOrientation.add(this.enterIncorrectOrientation, this);
             this.scale.leaveIncorrectOrientation.add(this.leaveIncorrectOrientation, this);
             this.scale.setScreenSize(true);
+            this.scale.refresh();
         }
     },
 

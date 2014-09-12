@@ -12,7 +12,7 @@
     "bower_components"
   ],
   "dependencies": {
-    "phaser": "2.0.4"
+    "phaser": "v2.1.1"
   },
   "devDependencies": {
 
