@@ -1,0 +1,66 @@
+NAMESPACE.GameName.Game = function (game) {
+    'use strict';
+    /*
+     //	When a State is added to Phaser it automatically has the following properties set on it, even if they already exist:
+     this.game;		//	a reference to the currently running game
+     this.add;		//	used to add sprites, text, groups, etc
+     this.camera;	//	a reference to the game camera
+     this.cache;		//	the game cache
+     this.input;		//	the global input manager (you can access this.input.keyboard, this.input.mouse, as well from it)
+     this.load;		//	for preloading assets
+     this.math;		//	lots of useful common math operations
+     this.sound;		//	the sound manager - add a sound, play one, set-up markers, etc
+     this.stage;		//	the game stage
+     this.time;		//	the clock
+     this.tweens;	//	the tween manager
+     this.world;		//	the game world
+     this.particles;	//	the particle manager
+     this.physics;	//	the physics manager
+     this.rnd;		//	the repeatable random number generator
+     */
+    //	You can use any of these from any function within this State.
+    //	But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
+    this.gameConfig = NAMESPACE.GameName.gameConfig;
+    this.gameOver = false;
+};
+
+NAMESPACE.GameName.Game.prototype = {
+
+    quitGame: function (pointer) {
+        'use strict';
+        //	Here you should destroy anything you no longer need.
+        //	Stop music, delete sprites, purge caches, free resources, all that good stuff.
+
+        //	Then let's go back to the main menu.
+        this.state.start('MainMenu');
+    },
+
+    shallQuit: function () {
+        'use strict';
+        if (this.gameOver) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+
+    create: function () {
+        'use strict';
+        this.physics.startSystem(this.gameConfig.physics.constant);
+
+        var bg = this.game.add.sprite(0,0,'notebook');
+        bg.scale.setTo(0.46,0.42);
+    },
+
+    update: function () {
+        'use strict';
+        if (this.shallQuit()) {
+            this.quitGame();
+        }
+    },
+
+    render: function () {
+        'use strict';
+        // do some debug rendering
+    }
+};
