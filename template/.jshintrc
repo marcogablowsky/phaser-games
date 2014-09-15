@@ -27,6 +27,7 @@
         "beforeEach",
         "inject",
         "$",
-        "Phaser"
+        "Phaser",
+        "NAMESPACE"
     ]
 }

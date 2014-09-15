@@ -1,4 +1,3 @@
-var NAMESPACE = NAMESPACE;
 NAMESPACE.GameName.Preloader = function (game) {
     'use strict';
 	this.background = null;

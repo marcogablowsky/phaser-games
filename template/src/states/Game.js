@@ -1,4 +1,3 @@
-var NAMESPACE = NAMESPACE;
 NAMESPACE.GameName.Game = function (game) {
     'use strict';
     /*
@@ -47,7 +46,7 @@ NAMESPACE.GameName.Game.prototype = {
 
     create: function () {
         'use strict';
-        this.physics.startSystem(this.gameConfig.physics);
+        this.physics.startSystem(this.gameConfig.physics.constant);
     },
 
     update: function () {

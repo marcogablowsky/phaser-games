@@ -1,4 +1,3 @@
-var NAMESPACE = NAMESPACE;
 NAMESPACE.GameName.Boot = function (game) {
     this.desktopDevice = NAMESPACE.GameName.gameConfig.device.desktop;
     this.otherDevices = NAMESPACE.GameName.gameConfig.device.other;
@@ -11,35 +10,31 @@ NAMESPACE.GameName.Boot.prototype = {
         //  Here we load the assets required for our preloader (in this case a background and a loading bar)
        // this.load.image('preloaderBackground', 'images/preloader_background.jpg');
        // this.load.image('preloaderBar', 'images/preloadr_bar.png');
+    },
 
-    },
-    setMinMaxDimensions: function(source) {
-        'use strict';
-        this.scale.minWidth = source.minWidth;
-        this.scale.minHeight = source.minHeight;
-        this.scale.maxWidth = source.maxWidth;
-        this.scale.maxHeight = source.maxHeight;
-    },
     setupDevice: function () {
         'use strict';
+        var configureCommons = function (obj, deviceSettings) {
+            obj.scale.scaleMode = deviceSettings.scaleMode;
+            obj.scale.setMinMax(deviceSettings.minWidth, deviceSettings.minHeight, deviceSettings.maxWidth, deviceSettings.maxHeight);
+            obj.scale.pageAlignHorizontally = true;
+            obj.scale.pageAlignVertically = true;
+            obj.scale.setScreenSize(true);
+        };
+
         if (this.game.device.desktop) {
-            this.scale.scaleMode = this.desktopDevice.scaleMode;
-            this.setMinMaxDimensions(this.desktopDevice);
-            this.scale.pageAlignHorizontally = true;
-            this.scale.pageAlignVertically = true;
-            this.scale.setScreenSize(true);
+            configureCommons(this,this.desktopDevice);
+            this.scale.refresh();
         }
         else {
-            this.scale.scaleMode = this.otherDevices.scaleMode;
-            this.setMinMaxDimensions(this.otherDevices);
-            this.scale.pageAlignHorizontally = true;
-            this.scale.pageAlignVertically = true;
+            configureCommons(this,this.otherDevices);
             this.scale.forceOrientation(true, false);
-            this.scale.hasResized.add(this.gameResized, this);
+            this.scale.setResizeCallback(this.gameResized, this);
             this.scale.enterIncorrectOrientation.add(this.enterIncorrectOrientation, this);
             this.scale.leaveIncorrectOrientation.add(this.leaveIncorrectOrientation, this);
-            this.scale.setScreenSize(true);
+            this.scale.refresh();
         }
+
     },
 
     create: function () {

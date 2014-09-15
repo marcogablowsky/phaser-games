@@ -1,4 +1,3 @@
-var NAMESPACE = NAMESPACE;
 NAMESPACE.GameName.MainMenu = function (game) {
     'use strict';
 	this.music = null;
