@@ -18,8 +18,8 @@ NAMESPACE.GameName = {
     gameConfig: {
         /* configure the Phaser.Game objects init parameters */
         game: {
-            width: 640,
-            height: 480,
+            width: 1024,
+            height: 768,
             renderer: Phaser.AUTO
         },
 

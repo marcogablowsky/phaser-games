@@ -48,8 +48,7 @@ NAMESPACE.GameName.Game.prototype = {
         'use strict';
         this.physics.startSystem(this.gameConfig.physics.constant);
 
-        var bg = this.game.add.sprite(0,0,'notebook');
-        bg.scale.setTo(0.46,0.42);
+        this.game.add.sprite(0,0,'notebook');
     },
 
     update: function () {

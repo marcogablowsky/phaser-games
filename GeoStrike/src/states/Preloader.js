@@ -29,7 +29,7 @@ NAMESPACE.GameName.Preloader.prototype = {
 		//this.load.bitmapFont('caslon', 'fonts/caslon.png', 'fonts/caslon.xml');
 		//	+ lots of other required assets here
 
-        this.load.image('notebook', 'assets/notebook.jpg');
+        this.load.image('notebook', 'assets/notebook.png');
 
 	},
 
