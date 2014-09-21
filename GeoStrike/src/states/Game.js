@@ -22,6 +22,7 @@ NAMESPACE.GameName.Game = function (game) {
     //	But do consider them as being 'reserved words', i.e. don't create a property for your own game called "world" or you'll over-write the world reference.
     this.gameConfig = NAMESPACE.GameName.gameConfig;
     this.gameOver = false;
+
 };
 
 NAMESPACE.GameName.Game.prototype = {
@@ -47,12 +48,15 @@ NAMESPACE.GameName.Game.prototype = {
     create: function () {
         'use strict';
         this.physics.startSystem(this.gameConfig.physics.constant);
-
         this.game.add.sprite(0,0,'notebook');
+
+        this.entityManager = new NAMESPACE.phaser.EntityManager(this.game, NAMESPACE.GameName.entities);
+
     },
 
     update: function () {
         'use strict';
+        this.entityManager.update();
         if (this.shallQuit()) {
             this.quitGame();
         }

@@ -30,7 +30,7 @@ NAMESPACE.GameName.Preloader.prototype = {
 		//	+ lots of other required assets here
 
         this.load.image('notebook', 'assets/notebook.png');
-
+        NAMESPACE.phaser.utils.preload(this.game,NAMESPACE.GameName.entities);
 	},
 
 	create: function () {

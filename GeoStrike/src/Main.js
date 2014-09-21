@@ -50,3 +50,6 @@ NAMESPACE.GameName = {
         }
     }
 };
+
+NAMESPACE.phaser = {};
+NAMESPACE.GameName.entities = {};
