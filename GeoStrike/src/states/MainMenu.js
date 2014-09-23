@@ -1,4 +1,4 @@
-NAMESPACE.GameName.MainMenu = function (game) {
+NAMESPACE.GameName.MainMenu = function () {
     'use strict';
 	this.music = null;
 	this.playButton = null;
