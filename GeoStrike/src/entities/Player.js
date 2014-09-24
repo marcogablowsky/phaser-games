@@ -25,6 +25,18 @@ NAMESPACE.GameName.entities.Player = function(game){
             }
         };
 
+    // create debugging object for player entity
+    if(NAMESPACE.GameName.debug){
+        NAMESPACE.GameName.debug.Player = {
+            speed : function(newSpeed){
+                if(newSpeed){
+                    _speed = newSpeed;
+                }
+                return _speed;
+            }
+        };
+    }
+
     _sprite.scale.setTo(0.5,0.5);
 
     return {

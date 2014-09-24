@@ -4,6 +4,10 @@ NAMESPACE.GameName = {
 
     /* configure the Phaser.Game states on bootstrapping */
     onBoot: function(game) {
+        'use strict';
+        if(window.location.search.indexOf('debugConsole') > -1){
+            NAMESPACE.GameName.debug = {};
+        }
         game.state.add('Boot', NAMESPACE.GameName.Boot);
         game.state.add('Preloader', NAMESPACE.GameName.Preloader);
         game.state.add('MainMenu', NAMESPACE.GameName.MainMenu);
@@ -43,10 +47,6 @@ NAMESPACE.GameName = {
                 maxHeight: 1080,
                 scaleMode: Phaser.ScaleManager.SHOW_ALL
             }
-        },
-
-        debug: {
-
         }
     }
 };
