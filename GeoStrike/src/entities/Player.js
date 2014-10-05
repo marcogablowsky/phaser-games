@@ -1,7 +1,7 @@
 
 NAMESPACE.GameName.entities.Player = function(game){
     'use strict';
-    var _sprite = game.add.sprite(game.width /2, game.height - 100, 'ship'),
+    var _sprite = game.add.sprite(game.width /2, game.height - 150, 'ship'),
         _speed = 7,
         _cursors = game.input.keyboard.createCursorKeys(),
 
@@ -33,11 +33,15 @@ NAMESPACE.GameName.entities.Player = function(game){
                     _speed = newSpeed;
                 }
                 return _speed;
+            },
+            scale: function(newScale){
+                if(newScale){
+                    _sprite.scale.setTo(newScale,newScale);
+                }
+                return _sprite.scale;
             }
         };
     }
-
-    _sprite.scale.setTo(0.5,0.5);
 
     return {
         update: update
