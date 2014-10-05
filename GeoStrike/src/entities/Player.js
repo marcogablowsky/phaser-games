@@ -4,6 +4,7 @@ NAMESPACE.GameName.entities.Player = function(game){
     var _sprite = game.add.sprite(game.width /2, game.height - 150, 'ship'),
         _speed = 7,
         _cursors = game.input.keyboard.createCursorKeys(),
+        _gameConf = NAMESPACE.GameName.gameConfig,
 
         update = function(){
             if (_cursors.up.isDown)
@@ -24,6 +25,9 @@ NAMESPACE.GameName.entities.Player = function(game){
                 _sprite.x += _speed;
             }
         };
+
+    game.physics.enable(_sprite, _gameConf.physics.constant);
+    _sprite.body.collideWorldBounds = true;
 
     // create debugging object for player entity
     if(NAMESPACE.GameName.debug){
