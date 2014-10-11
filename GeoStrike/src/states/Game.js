@@ -3,8 +3,11 @@ NAMESPACE.GameName.Game = function (game) {
 
     var _game = game,
         _gameConfig = NAMESPACE.GameName.gameConfig,
-        _gameOver = false,
-        _entityManager,
+        _state = {
+            gameOver: false,
+            lives: 3,
+            score: 0
+        },
 
         quitGame = function () {
             //	Here you should destroy anything you no longer need.
@@ -14,7 +17,7 @@ NAMESPACE.GameName.Game = function (game) {
         },
 
         shallQuit = function () {
-            if (_gameOver) {
+            if (_state.gameOver) {
                 return true;
             } else {
                 return false;
@@ -24,18 +27,26 @@ NAMESPACE.GameName.Game = function (game) {
         create = function () {
             this.physics.startSystem(_gameConfig.physics.constant);
             _game.add.sprite(0,0,'notebook');
-            _entityManager = new NAMESPACE.phaser.EntityManager(_game, NAMESPACE.GameName.entities);
         },
 
         update = function () {
-            _entityManager.update();
             if (shallQuit()) {
                 quitGame();
             }
+        },
+
+        score = function(amount){
+            _state.score += amount;
+        },
+
+        lives = function(amount){
+            _state.lives += amount;
         };
 
     return {
         create: create,
-        update: update
+        update: update,
+        score: score,
+        lives: lives
     };
 };
