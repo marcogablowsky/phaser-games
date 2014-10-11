@@ -28,6 +28,6 @@
         "inject",
         "$",
         "Phaser",
-        "NAMESPACE"
+        "MAG"
     ]
 }

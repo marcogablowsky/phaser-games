@@ -1,22 +1,21 @@
-NAMESPACE.GameName.Boot = function () {
+MAG.GeoStrike.Boot = function () {
     'use strict';
-    var _desktopDevice = NAMESPACE.GameName.gameConfig.device.desktop,
-        _otherDevices = NAMESPACE.GameName.gameConfig.device.other,
+    var _desktopDevice = MAG.GeoStrike.gameConfig.device.desktop,
+        _otherDevices = MAG.GeoStrike.gameConfig.device.other,
 
         preload = function () {
-            console.log('preload of Boot state');
             //  Here we load the assets required for our preloader (in this case a background and a loading bar)
             // this.load.image('preloaderBackground', 'images/preloader_background.jpg');
             // this.load.image('preloaderBar', 'images/preloadr_bar.png');
         },
 
         enterIncorrectOrientation = function () {
-            NAMESPACE.GameName.orientated = false;
+            MAG.GeoStrike.orientated = false;
             document.getElementById('orientation').style.display = 'block';
         },
 
         leaveIncorrectOrientation = function () {
-            NAMESPACE.GameName.orientated = true;
+            MAG.GeoStrike.orientated = true;
             document.getElementById('orientation').style.display = 'none';
         },
 
@@ -30,11 +29,11 @@ NAMESPACE.GameName.Boot = function () {
             };
 
             if (state.game.device.desktop) {
-                configureCommons(state,_desktopDevice);
+                configureCommons(state, _desktopDevice);
                 state.scale.refresh();
             }
             else {
-                configureCommons(this,_otherDevices);
+                configureCommons(this, _otherDevices);
                 state.scale.forceOrientation(true, false);
                 // state.scale.setResizeCallback(gameResized, state);
                 state.scale.enterIncorrectOrientation.add(enterIncorrectOrientation, state);

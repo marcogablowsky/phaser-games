@@ -1,27 +1,22 @@
-
-NAMESPACE.GameName.entities.Player = function(game){
+MAG.GeoStrike.entities.Player = function (game) {
     'use strict';
-    var _sprite = game.add.sprite(game.width /2, game.height - 150, 'ship'),
+    var _sprite = game.add.sprite(game.width / 2, game.height - 150, 'ship'),
         _speed = 7,
         _cursors = game.input.keyboard.createCursorKeys(),
-        _gameConf = NAMESPACE.GameName.gameConfig,
+        _gameConf = MAG.GeoStrike.gameConfig,
 
-        update = function(){
-            if (_cursors.up.isDown)
-            {
+        update = function () {
+            if (_cursors.up.isDown) {
                 _sprite.y -= _speed;
             }
-            else if (_cursors.down.isDown)
-            {
+            else if (_cursors.down.isDown) {
                 _sprite.y += _speed;
             }
 
-            if (_cursors.left.isDown)
-            {
+            if (_cursors.left.isDown) {
                 _sprite.x -= _speed;
             }
-            else if (_cursors.right.isDown)
-            {
+            else if (_cursors.right.isDown) {
                 _sprite.x += _speed;
             }
         };
@@ -30,17 +25,17 @@ NAMESPACE.GameName.entities.Player = function(game){
     _sprite.body.collideWorldBounds = true;
 
     // create debugging object for player entity
-    if(NAMESPACE.GameName.debug){
-        NAMESPACE.GameName.debug.Player = {
-            speed : function(newSpeed){
-                if(newSpeed){
+    if (MAG.GeoStrike.debug) {
+        MAG.GeoStrike.debug.Player = {
+            speed: function (newSpeed) {
+                if (newSpeed) {
                     _speed = newSpeed;
                 }
                 return _speed;
             },
-            scale: function(newScale){
-                if(newScale){
-                    _sprite.scale.setTo(newScale,newScale);
+            scale: function (newScale) {
+                if (newScale) {
+                    _sprite.scale.setTo(newScale, newScale);
                 }
                 return _sprite.scale;
             }
@@ -52,7 +47,7 @@ NAMESPACE.GameName.entities.Player = function(game){
     };
 };
 
-NAMESPACE.GameName.entities.Player.preload = function(game){
+MAG.GeoStrike.entities.Player.preload = function (game) {
     'use strict';
     game.load.image('ship', 'assets/ship.png');
 };

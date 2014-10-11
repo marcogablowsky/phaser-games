@@ -1,8 +1,9 @@
-NAMESPACE.GameName.Game = function (game) {
+MAG.GeoStrike.Game = function (game) {
     'use strict';
 
     var _game = game,
-        _gameConfig = NAMESPACE.GameName.gameConfig,
+        _gameConfig = MAG.GeoStrike.gameConfig,
+        _entityManager,
         _state = {
             gameOver: false,
             lives: 3,
@@ -27,9 +28,11 @@ NAMESPACE.GameName.Game = function (game) {
         create = function () {
             this.physics.startSystem(_gameConfig.physics.constant);
             _game.add.sprite(0,0,'notebook');
+            _entityManager = new MAG.phaser.EntityManager(_game, MAG.GeoStrike.entities);
         },
 
         update = function () {
+            _entityManager.update();
             if (shallQuit()) {
                 quitGame();
             }

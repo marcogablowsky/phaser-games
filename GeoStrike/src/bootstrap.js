@@ -2,11 +2,11 @@
 var mygame = (function () {
     'use strict';
 
-    var conf = NAMESPACE.GameName.gameConfig.game;
+    var conf = MAG.GeoStrike.gameConfig.game;
     var game = new Phaser.Game(conf.width, conf.height, conf.renderer, 'game');
 
     /* This has to be done in callback function since the State scripts are loaded after Main.js */
-    NAMESPACE.GameName.onBoot(game);
+    MAG.GeoStrike.onBoot(game);
 
     return game;
 })();

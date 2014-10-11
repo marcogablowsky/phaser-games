@@ -1,17 +1,17 @@
-var NAMESPACE = NAMESPACE || {};
+var MAG = MAG || {};
 
-NAMESPACE.GameName = {
+MAG.GeoStrike = {
 
     /* configure the Phaser.Game states on bootstrapping */
-    onBoot: function(game) {
+    onBoot: function (game) {
         'use strict';
-        if(window.location.search.indexOf('debugConsole') > -1){
-            NAMESPACE.GameName.debug = {};
+        if (window.location.search.indexOf('debugConsole') > -1) {
+            MAG.GeoStrike.debug = {};
         }
-        game.state.add('Boot', NAMESPACE.GameName.Boot);
-        game.state.add('Preloader', NAMESPACE.GameName.Preloader);
-        game.state.add('MainMenu', NAMESPACE.GameName.MainMenu);
-        game.state.add('Game', NAMESPACE.GameName.Game);
+        game.state.add('Boot', MAG.GeoStrike.Boot);
+        game.state.add('Preloader', MAG.GeoStrike.Preloader);
+        game.state.add('MainMenu', MAG.GeoStrike.MainMenu);
+        game.state.add('Game', MAG.GeoStrike.Game);
         game.state.start('Boot');
     },
 
@@ -51,5 +51,5 @@ NAMESPACE.GameName = {
     }
 };
 
-NAMESPACE.phaser = {};
-NAMESPACE.GameName.entities = {};
+MAG.phaser = {};
+MAG.GeoStrike.entities = {};

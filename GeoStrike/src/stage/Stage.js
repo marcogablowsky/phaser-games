@@ -1,5 +1,4 @@
-
-NAMESPACE.GameName.Stage = function(gameState, stageDef){
+MAG.GeoStrike.Stage = function (gameState, stageDef) {
     'use strict';
 
     var _parent = gameState,
