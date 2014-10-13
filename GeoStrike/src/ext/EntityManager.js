@@ -1,4 +1,4 @@
-MAG.phaser.EntityManager = function (game, entityContainer) {
+MAG.phaser.EntityManager = function (game, entityContainer, doRender) {
     'use strict';
     var entities = {},
         index = [],
@@ -27,11 +27,24 @@ MAG.phaser.EntityManager = function (game, entityContainer) {
                     entities[index[loopCount]].update();
                 }
             }
+        },
+
+        render = function(){
+            if(doRender){
+                var loopCount = 0;
+
+                for (loopCount; loopCount < index.length; loopCount++) {
+                    if (entities[index[loopCount]].render) {
+                        entities[index[loopCount]].render();
+                    }
+                }
+            }
         };
 
     initializeEntities();
 
     return {
-        update: update
+        update: update,
+        render: render
     };
 };

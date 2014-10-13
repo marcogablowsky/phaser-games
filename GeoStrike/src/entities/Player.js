@@ -24,11 +24,18 @@ MAG.GeoStrike.entities.Player = function (game) {
             if (game.time.now > _beamTimer) {
                 var bullet = _beams.getFirstExists(false);
                 if (bullet) {
-                    bullet.reset(_sprite.x + _sprite.width / 2, _sprite.y + 8);
+                    bullet.reset(_sprite.x , _sprite.y - _sprite.height /2);
                     bullet.body.velocity.y = -400;
                     _beamTimer = game.time.now + _fireDelay;
                 }
             }
+        },
+
+        _configurePhysicsBody = function(){
+            game.physics.enable(_sprite, _gameConf.physics.constant);
+            _sprite.body.collideWorldBounds = true;
+            _sprite.body.height = _sprite.height /2;
+            _sprite.body.width = _sprite.width /2;
         },
 
         update = function () {
@@ -49,10 +56,17 @@ MAG.GeoStrike.entities.Player = function (game) {
             if (_fireButton.isDown) {
                 _fire();
             }
+        },
+
+        render = function (){
+            game.debug.body(_sprite);
+            _beams.forEachAlive(function(elem){
+                game.debug.body(elem);
+            });
         };
 
-    game.physics.enable(_sprite, _gameConf.physics.constant);
-    _sprite.body.collideWorldBounds = true;
+    _configurePhysicsBody();
+    _sprite.anchor.setTo(0.5);
 
     _initBeams();
 
@@ -77,12 +91,17 @@ MAG.GeoStrike.entities.Player = function (game) {
                     _fireDelay = newDelay;
                 }
                 return _fireDelay;
+            },
+
+            sprite: function(){
+                return _sprite;
             }
         };
     }
 
     return {
-        update: update
+        update: update,
+        render: render
     };
 };
 

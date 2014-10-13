@@ -28,7 +28,7 @@ MAG.GeoStrike.Game = function (game) {
         create = function () {
             this.physics.startSystem(_gameConfig.physics.constant);
             _game.add.sprite(0,0,'notebook');
-            _entityManager = new MAG.phaser.EntityManager(_game, MAG.GeoStrike.entities);
+            _entityManager = new MAG.phaser.EntityManager(_game, MAG.GeoStrike.entities, true);
         },
 
         update = function () {
@@ -36,6 +36,10 @@ MAG.GeoStrike.Game = function (game) {
             if (shallQuit()) {
                 quitGame();
             }
+        },
+
+        render = function(){
+            _entityManager.render();
         },
 
         score = function(amount){
@@ -49,6 +53,7 @@ MAG.GeoStrike.Game = function (game) {
     return {
         create: create,
         update: update,
+        render: render,
         score: score,
         lives: lives
     };

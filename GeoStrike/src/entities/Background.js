@@ -1,7 +1,7 @@
 MAG.GeoStrike.entities.Background = function (game) {
     'use strict';
 
-    var _sprite = game.add.tileSprite(0, 0, 1024, 768, 'bg'),
+    var _sprite = game.add.tileSprite(10, 10, 1004, 748, 'bg'),
 
         update = function () {
             _sprite.tilePosition.y += 2;
