@@ -101,7 +101,8 @@ MAG.GeoStrike.entities.Player = function (game) {
 
     return {
         update: update,
-        render: render
+        render: render,
+        entityType: 'player'
     };
 };
 

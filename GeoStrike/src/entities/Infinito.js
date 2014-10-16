@@ -30,7 +30,8 @@ MAG.GeoStrike.entities.Infinito = function(game){
 
     return {
         update: update,
-        render: render
+        render: render,
+        entityType: 'enemy'
     };
 };
 

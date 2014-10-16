@@ -28,7 +28,12 @@ MAG.GeoStrike.Game = function (game) {
         create = function () {
             this.physics.startSystem(_gameConfig.physics.constant);
             _game.add.sprite(0,0,'notebook');
-            _entityManager = new MAG.phaser.EntityManager(_game, MAG.GeoStrike.entities, true);
+
+            var entityFactory = new MAG.phaser.EntityFactory(game, MAG.GeoStrike.entities);
+            _entityManager = new MAG.phaser.EntityManager(entityFactory, true);
+
+            _entityManager.createEntity('Background');
+            _entityManager.createEntity('Player');
         },
 
         update = function () {

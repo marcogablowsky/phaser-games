@@ -8,7 +8,8 @@ MAG.GeoStrike.entities.Background = function (game) {
         };
 
     return {
-        update: update
+        update: update,
+        entityType: 'statics'
     };
 
 };
