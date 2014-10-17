@@ -1,5 +1,4 @@
 MAG.phaser.EntityFactory = function(game, entityPackage){
-    'use strict';
     this.game = game;
     this.entityPackage = entityPackage;
 };

@@ -1,4 +1,4 @@
-MAG.GeoStrike.Preloader = function (game) {
+MAG.GeoStrike.Preloader = function () {
     'use strict';
     this.background = null;
     this.preloadBar = null;
@@ -21,16 +21,15 @@ MAG.GeoStrike.Preloader.prototype = {
         //	as the files below are loaded in.
         //this.load.setPreloadSprite(this.preloadBar);
 
-        //	Here we load the rest of the assets our game needs.
-        //	As this is just a Project Template I've not provided these assets, the lines below won't work as the files themselves will 404, they are just an example of use.
-        //this.load.image('titlepage', 'images/title.jpg');
-        //this.load.atlas('playButton', 'images/play_button.png', 'images/play_button.json');
-        //this.load.audio('titleMusic', ['audio/main_menu.mp3']);
-        //this.load.bitmapFont('caslon', 'fonts/caslon.png', 'fonts/caslon.xml');
-        //	+ lots of other required assets here
+        var loopCount = 0,
+            entityContainer = MAG.GeoStrike.entities,
+            entities = Object.getOwnPropertyNames(entityContainer);
 
-        this.load.image('notebook', 'assets/notebook.png');
-        MAG.phaser.utils.preload(this.game, MAG.GeoStrike.entities);
+        for (loopCount; loopCount < entities.length; loopCount++) {
+            if (entityContainer[entities[loopCount]].preload) {
+                entityContainer[entities[loopCount]].preload(this.game);
+            }
+        }
     },
 
     create: function () {
