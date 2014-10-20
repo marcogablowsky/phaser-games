@@ -3,11 +3,17 @@ MAG.GeoStrike.Game = function (game) {
 
     var _gameConfig = MAG.GeoStrike.gameConfig,
         _entityManager,
-        _state = {
-            gameOver: false,
-            lives: 3,
-            score: 0
+
+        resetState = function () {
+            return {
+                stageId: 1,
+                stage: undefined,
+                gameOver: false,
+                lives: 3,
+                score: 0
+            };
         },
+        _state = resetState(),
 
         quitGame = function () {
             //	Here you should destroy anything you no longer need.
@@ -31,12 +37,14 @@ MAG.GeoStrike.Game = function (game) {
             _entityManager = new MAG.phaser.EntityManager(entityFactory);
 
             _entityManager.createEntity('StaticBackground');
-            _entityManager.createEntity('ScrollingBackground');
             _entityManager.createEntity('Player');
+
+            _state.stage = new MAG.GeoStrike.Stage(_entityManager, MAG.GeoStrike.stages['stage' + _state.stageId]);
         },
 
         update = function () {
             _entityManager.update();
+            _state.stage.update();
             if (shallQuit()) {
                 quitGame();
             }

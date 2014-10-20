@@ -43,6 +43,7 @@ MAG.phaser.EntityManager.prototype = {
         entityId = name + '_' + this.creationCount++;
         this.entities[entity.entityType][entityId] = entity;
         this.entities.index[entity.entityType].push(entityId);
+        return entity;
     },
 
     update: function () {
