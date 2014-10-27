@@ -23,6 +23,10 @@ MAG.GeoStrike.entities.Infinito.prototype = {
 
     render: function () {
         this._game.debug.body(this._sprite);
+    },
+
+    collidable: function () {
+        return this._sprite;
     }
 };
 

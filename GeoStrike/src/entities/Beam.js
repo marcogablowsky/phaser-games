@@ -23,6 +23,10 @@ MAG.GeoStrike.entities.Beam.prototype = {
                 this._beamTimer = this._game.time.now + this._fireDelay;
             }
         }
+    },
+
+    collidable: function () {
+        return this._beams;
     }
 };
 

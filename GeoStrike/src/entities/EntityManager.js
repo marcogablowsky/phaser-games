@@ -1,4 +1,5 @@
-MAG.phaser.EntityManager = function (entityFactory, doRender) {
+MAG.phaser.EntityManager = function (game, entityFactory, doRender) {
+    this.game = game;
     this.entityFactory = entityFactory;
     this.doRender = doRender || false;
     this.creationCount = 0;
@@ -43,11 +44,22 @@ MAG.phaser.EntityManager.prototype = {
         return entity;
     },
 
+    createBeam: function () {
+        this.beams = this.entityFactory.create('Beam');
+        return this.beams;
+    },
+
     update: function () {
         var funcName = 'update';
         this.callEach(this.entities.index[MAG.phaser.entityTypes.statics], this.entities[MAG.phaser.entityTypes.statics], funcName);
         this.callEach(this.entities.index[MAG.phaser.entityTypes.player], this.entities[MAG.phaser.entityTypes.player], funcName);
         this.callEach(this.entities.index[MAG.phaser.entityTypes.enemy], this.entities[MAG.phaser.entityTypes.enemy], funcName);
+
+        for (var i = 0; i < this.entities.index[MAG.phaser.entityTypes.enemy].length; i++) {
+            var enemy = this.entities[MAG.phaser.entityTypes.enemy][this.entities.index[MAG.phaser.entityTypes.enemy][i]];
+            this.game.physics.arcade.overlap(this.beams.collidable(), enemy.collidable(), this.beamCollidesWithEnemy, null, this);
+        }
+
     },
 
     render: function () {
@@ -57,5 +69,10 @@ MAG.phaser.EntityManager.prototype = {
             this.callEach(this.entities.index[MAG.phaser.entityTypes.player], this.entities[MAG.phaser.entityTypes.player], funcName);
             this.callEach(this.entities.index[MAG.phaser.entityTypes.enemy], this.entities[MAG.phaser.entityTypes.enemy], funcName);
         }
+    },
+
+    beamCollidesWithEnemy: function (beam, enemy) {
+        beam.kill();
+        enemy.kill();
     }
 };

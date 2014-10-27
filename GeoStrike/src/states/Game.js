@@ -1,6 +1,6 @@
 MAG.GeoStrike.Game = function (game) {
     var entityFactory = new MAG.phaser.EntityFactory(game, MAG.GeoStrike.entities);
-    this._entityManager = new MAG.phaser.EntityManager(entityFactory);
+    this._entityManager = new MAG.phaser.EntityManager(game, entityFactory);
     this._state = this._resetState();
 };
 
@@ -29,7 +29,7 @@ MAG.GeoStrike.Game.prototype = {
     create: function () {
         this.physics.startSystem(MAG.GeoStrike.gameConfig.physics.constant);
         this._entityManager.createEntity('StaticBackground');
-        var beam = this._entityManager.createEntity('Beam');
+        var beam = this._entityManager.createBeam();
         this._entityManager.createEntity('Player', beam);
 
         this._state.stage = new MAG.GeoStrike.Stage(this._entityManager, MAG.GeoStrike.stages['stage' + this._state.stageId]);
