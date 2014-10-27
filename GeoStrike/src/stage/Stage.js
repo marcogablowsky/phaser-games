@@ -7,13 +7,9 @@ MAG.GeoStrike.Stage = function (entityManager, stageDef) {
 
     this.activeWaves = [];
 
-    MAG.GeoStrike.Stage.initialize(entityManager, stageDef);
-};
+    this.entityManager.createEntity(stageDef.backgroundType);
 
-MAG.GeoStrike.Stage.initialize = function (entityManager, stageDef) {
-    entityManager.createEntity(stageDef.backgroundType);
 };
-
 
 MAG.GeoStrike.Stage.prototype = {
 

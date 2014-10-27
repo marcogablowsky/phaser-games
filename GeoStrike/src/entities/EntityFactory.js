@@ -1,4 +1,4 @@
-MAG.phaser.EntityFactory = function(game, entityPackage){
+MAG.phaser.EntityFactory = function (game, entityPackage) {
     this.game = game;
     this.entityPackage = entityPackage;
 };
@@ -11,7 +11,6 @@ MAG.phaser.EntityFactory.prototype = {
      * @param config optional configuration object required to initialize the entity
      */
     create: function (entityName, config) {
-        'use strict';
         var isValidEntity = this.entityPackage[entityName] && typeof this.entityPackage[entityName] === 'function';
         if (isValidEntity) {
             return new this.entityPackage[entityName](this.game, config);

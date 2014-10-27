@@ -10,23 +10,34 @@ var bases = {
 };
 
 var paths = {
-    scripts: ['src/**/*.js'],
+    scripts: ['src/**/*.js', '!src/bootstrap.js'],
+    scriptsTarget: '/scripts',
     html: ['index.html']
 };
 
 // Delete the dist directory
-gulp.task('clean', function() {
+gulp.task('clean', function () {
     return gulp.src(bases.dist)
         .pipe(clean());
 });
 
-gulp.task('scripts', ['clean'], function() {
+gulp.task('jshint', ['clean'], function () {
     gulp.src(paths.scripts)
         .pipe(jshint())
-        .pipe(jshint.reporter('default'))
-        .pipe(uglify())
-        .pipe(concat('geostrike.min.js'))
-        .pipe(gulp.dest(bases.dist + 'scripts/'));
+        .pipe(jshint.reporter('default'));
 });
 
-gulp.task('default',['clean', 'scripts']);
+gulp.task('scripts-min', ['clean'], function () {
+    gulp.src(paths.scripts)
+        .pipe(concat('geostrike.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(bases.dist + paths.scriptsTarget));
+});
+
+gulp.task('scripts', ['clean'], function () {
+    gulp.src(paths.scripts)
+        .pipe(concat('geostrike.js'))
+        .pipe(gulp.dest(bases.dist + paths.scriptsTarget));
+});
+
+gulp.task('default', ['clean', 'jshint', 'scripts', 'scripts-min']);

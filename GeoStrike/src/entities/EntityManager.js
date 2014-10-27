@@ -1,5 +1,4 @@
 MAG.phaser.EntityManager = function (entityFactory, doRender) {
-    'use strict';
     this.entityFactory = entityFactory;
     this.doRender = doRender || false;
     this.creationCount = 0;
@@ -7,7 +6,7 @@ MAG.phaser.EntityManager = function (entityFactory, doRender) {
     this.entities = MAG.phaser.EntityManager.createEntityStorage();
 };
 
-MAG.phaser.EntityManager.createEntityStorage = function(){
+MAG.phaser.EntityManager.createEntityStorage = function () {
     var storage = {
         index: {}
     };
@@ -24,7 +23,6 @@ MAG.phaser.EntityManager.createEntityStorage = function(){
 MAG.phaser.EntityManager.prototype = {
 
     callEach: function (indexArray, container, funcName) {
-        'use strict';
         var loopCount = 0;
         for (loopCount; loopCount < indexArray.length; loopCount++) {
             if (container[indexArray[loopCount]][funcName]) {
@@ -34,7 +32,6 @@ MAG.phaser.EntityManager.prototype = {
     },
 
     createEntity: function (name, config) {
-        'use strict';
         var entity = this.entityFactory.create(name, config);
         var entityId;
         if (!entity.entityType) {
@@ -47,7 +44,6 @@ MAG.phaser.EntityManager.prototype = {
     },
 
     update: function () {
-        'use strict';
         var funcName = 'update';
         this.callEach(this.entities.index[MAG.phaser.entityTypes.statics], this.entities[MAG.phaser.entityTypes.statics], funcName);
         this.callEach(this.entities.index[MAG.phaser.entityTypes.player], this.entities[MAG.phaser.entityTypes.player], funcName);
@@ -55,7 +51,6 @@ MAG.phaser.EntityManager.prototype = {
     },
 
     render: function () {
-        'use strict';
         if (this.doRender) {
             var funcName = 'render';
             this.callEach(this.entities.index[MAG.phaser.entityTypes.statics], this.entities[MAG.phaser.entityTypes.statics], funcName);

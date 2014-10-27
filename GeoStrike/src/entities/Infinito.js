@@ -1,39 +1,37 @@
 MAG.GeoStrike.entities.Infinito = function(game){
-    'use strict';
-    var _sprite = game.add.sprite(game.rnd.integerInRange(20,game.width-20), 20, 'infinito'),
+    this._sprite = game.add.sprite(game.rnd.integerInRange(20, game.width - 20), 20, 'infinito');
+    game.physics.enable(this._sprite, MAG.GeoStrike.gameConfig.physics.constant);
+    this._body = this._sprite.body;
+    this._game = game;
 
-        update = function(){
-            if (_sprite.body.velocity.x > 0 && _sprite.x > game.width - game.width - 20) {
-                _sprite.body.velocity.x = -_sprite.body.velocity.x;
-            } else if (_sprite.body.velocity.x < 0 && _sprite.x < game.width - 20) {
-                _sprite.body.velocity.x = -_sprite.body.velocity.x;
-            }
+    this._body.velocity.x = 140;
+    this._body.velocity.y = 120;
+    this._body.height = this._sprite.height / 2;
+    this._body.width = this._sprite.width / 2;
+    this._sprite.anchor.setTo(0.5);
+};
 
-            _sprite.rotation += 0.10;
-        },
+MAG.GeoStrike.entities.Infinito.prototype = {
+    update: function () {
+        if (this._body.velocity.x > 0 && this._sprite.x > this._game.width - this._game.width - 20) {
+            this._body.velocity.x = -this._body.velocity.x;
+        } else if (this._body.velocity.x < 0 && this._sprite.x < this._game.width - 20) {
+            this._body.velocity.x = -this._body.velocity.x;
+        }
+        this._sprite.rotation += 0.10;
+    },
 
-        render = function (){
-            game.debug.body(_sprite);
-        };
-
-    game.physics.enable(_sprite, MAG.GeoStrike.gameConfig.physics.constant);
-
-    _sprite.body.velocity.x = 140;
-    _sprite.body.velocity.y = 120;
-
-    _sprite.body.height = _sprite.height /2;
-    _sprite.body.width = _sprite.width /2;
-
-    _sprite.anchor.setTo(0.5);
-
-    return {
-        update: update,
-        render: render,
-        entityType: 'enemy'
-    };
+    render: function () {
+        this._game.debug.body(this._sprite);
+    }
 };
 
 MAG.GeoStrike.entities.Infinito.preload = function(game){
-    'use strict';
     game.load.image('infinito', 'assets/infinito.png');
 };
+
+Object.defineProperty(MAG.GeoStrike.entities.Infinito.prototype, 'entityType', {
+    get: function () {
+        return MAG.phaser.entityTypes.enemy;
+    }
+});

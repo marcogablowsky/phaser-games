@@ -1,10 +1,9 @@
-var MAG = MAG || {};
+var MAG = MAG || {}; // jshint ignore:line
 
 MAG.GeoStrike = {
 
     /* configure the Phaser.Game states on bootstrapping */
     onBoot: function (game) {
-        'use strict';
         if (window.location.search.indexOf('debugConsole') > -1) {
             MAG.GeoStrike.debug = {};
         }
