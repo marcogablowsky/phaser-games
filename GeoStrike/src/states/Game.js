@@ -29,7 +29,8 @@ MAG.GeoStrike.Game.prototype = {
     create: function () {
         this.physics.startSystem(MAG.GeoStrike.gameConfig.physics.constant);
         this._entityManager.createEntity('StaticBackground');
-        this._entityManager.createEntity('Player');
+        var beam = this._entityManager.createEntity('Beam');
+        this._entityManager.createEntity('Player', beam);
 
         this._state.stage = new MAG.GeoStrike.Stage(this._entityManager, MAG.GeoStrike.stages['stage' + this._state.stageId]);
     },
