@@ -1,6 +1,6 @@
-MAG.phaser.EntityManager = function (game, entityFactory, doRender) {
+MAG.phaser.EntityManager = function (game, entityPackage, doRender) {
     this.game = game;
-    this.entityFactory = entityFactory;
+    this.entityFactory = new MAG.phaser.EntityFactory(game, entityPackage);
     this.doRender = doRender || false;
     this.creationCount = 0;
 
@@ -44,9 +44,23 @@ MAG.phaser.EntityManager.prototype = {
         return entity;
     },
 
-    createBeam: function () {
+    createPlayer: function () {
         this.beams = this.entityFactory.create('Beam');
+        this.player = this.createEntity('Player',this.beams);
         return this.beams;
+    },
+
+    beamCollidesWithEnemy: function (beam, enemy) {
+        beam.kill();
+        enemy.kill();
+        this.game.magcustom.playstate.score(1000);
+    },
+
+    playerHit: function(enemy, player){
+        enemy.kill();
+        if(this.game.magcustom.playstate.lives(-1) <= 0 ){
+            player.kill();
+        }
     },
 
     update: function () {
@@ -58,6 +72,7 @@ MAG.phaser.EntityManager.prototype = {
         for (var i = 0; i < this.entities.index[MAG.phaser.entityTypes.enemy].length; i++) {
             var enemy = this.entities[MAG.phaser.entityTypes.enemy][this.entities.index[MAG.phaser.entityTypes.enemy][i]];
             this.game.physics.arcade.overlap(this.beams.collidable(), enemy.collidable(), this.beamCollidesWithEnemy, null, this);
+            this.game.physics.arcade.overlap(enemy.collidable(), this.player.collidable(), this.playerHit, null, this);
         }
 
     },
@@ -69,10 +84,6 @@ MAG.phaser.EntityManager.prototype = {
             this.callEach(this.entities.index[MAG.phaser.entityTypes.player], this.entities[MAG.phaser.entityTypes.player], funcName);
             this.callEach(this.entities.index[MAG.phaser.entityTypes.enemy], this.entities[MAG.phaser.entityTypes.enemy], funcName);
         }
-    },
-
-    beamCollidesWithEnemy: function (beam, enemy) {
-        beam.kill();
-        enemy.kill();
     }
+
 };

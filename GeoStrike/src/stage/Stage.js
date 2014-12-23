@@ -1,4 +1,5 @@
-MAG.GeoStrike.Stage = function (entityManager, stageDef) {
+MAG.GeoStrike.Stage = function (entityManager, stageId) {
+    var stageDef = MAG.GeoStrike.stages['stage'+stageId];
     this.entityManager = entityManager;
     this.pendingWaves = stageDef.waves.reverse();
     this.maxWaves = stageDef.maxActiveWaves;
@@ -6,9 +7,7 @@ MAG.GeoStrike.Stage = function (entityManager, stageDef) {
     this.waveTimer = Date.now() - this.waveDelay; // instant spawn of first wave
 
     this.activeWaves = [];
-
     this.entityManager.createEntity(stageDef.backgroundType);
-
 };
 
 MAG.GeoStrike.Stage.prototype = {

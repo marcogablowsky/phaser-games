@@ -1,12 +1,14 @@
 MAG.GeoStrike.Game = function (game) {
-    var entityFactory = new MAG.phaser.EntityFactory(game, MAG.GeoStrike.entities);
-    this._entityManager = new MAG.phaser.EntityManager(game, entityFactory);
-    this._state = this._resetState();
+    this._entityManager = new MAG.phaser.EntityManager(game, MAG.GeoStrike.entities,false);
+    this._resetState();
+
+    game.magcustom = {};
+    game.magcustom.playstate = this;
 };
 
 MAG.GeoStrike.Game.prototype = {
     _resetState: function () {
-        return {
+        this._state = {
             stageId: 1,
             stage: undefined,
             gameOver: false,
@@ -29,16 +31,15 @@ MAG.GeoStrike.Game.prototype = {
     create: function () {
         this.physics.startSystem(MAG.GeoStrike.gameConfig.physics.constant);
         this._entityManager.createEntity('StaticBackground');
-        var beam = this._entityManager.createBeam();
-        this._entityManager.createEntity('Player', beam);
-
-        this._state.stage = new MAG.GeoStrike.Stage(this._entityManager, MAG.GeoStrike.stages['stage' + this._state.stageId]);
+        this._entityManager.createPlayer();
+        this._state.stage = new MAG.GeoStrike.Stage(this._entityManager, this._state.stageId);
     },
 
     update: function () {
         this._entityManager.update();
         this._state.stage.update();
         if (this._shallQuit()) {
+            this._resetState();
             this._quitGame();
         }
     },
@@ -53,5 +54,10 @@ MAG.GeoStrike.Game.prototype = {
 
     lives: function (amount) {
         this._state.lives += amount;
+        console.log('lives: '+this._state.lives);
+        if(this._state.lives <= 0){
+            this._state.gameOver = true;
+        }
+        return this._state.lives;
     }
 };
