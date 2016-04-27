@@ -1,7 +1,9 @@
 {
   "name": "geostrike",
   "version": "1.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "phaser": "v2.1.1"
+  },
   "devDependencies": {
     "gulp": "3.8.9",
     "gulp-jshint": "~1.8.5",
